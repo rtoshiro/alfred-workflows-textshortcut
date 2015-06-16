@@ -57,6 +57,9 @@ class TextShortcut
           {
             // Escreve o arquivo com o nome do comando
             $text = shell_exec('osascript get_from_clipboard.scpt ' . $cmd);
+          
+            $text = preg_replace('/.*\n\n/', '', $text);
+            
             $this->workflows->write($text, $cmd . '.ts');
           }
           return '';

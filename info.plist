@@ -59,6 +59,8 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
@@ -82,6 +84,14 @@
 				<integer>0</integer>
 				<key>keyword</key>
 				<string>ts</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
 				<key>script</key>
 				<string>php filter.php "{query}"</string>
 				<key>title</key>
@@ -100,7 +110,9 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>1.0 - Hooray!</string>
+	<string>1.0 - Hooray!
+
+1.0.1 - Bug fix - thx to dserodio.</string>
 	<key>uidata</key>
 	<dict>
 		<key>16039760-F173-4AB8-9C73-DA7401D5DE23</key>
