@@ -30,17 +30,91 @@
 				<string></string>
 			</dict>
 		</array>
+		<key>62C33B2F-5F6C-4D8C-9CC6-FB5A6FF4A143</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8AD2855C-1B8F-4998-84FD-1948C4939C4A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>A6C34548-4213-4E69-962C-E4289E361265</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>62C33B2F-5F6C-4D8C-9CC6-FB5A6FF4A143</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Toshiro Sugii</string>
 	<key>description</key>
-	<string>Create text abbreviations!</string>
+	<string>Create text snippets and terminal commands!</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Text Shortcut</string>
+	<string>Text Snippets</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>ts</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>script</key>
+				<string>php filter.php ts "{query}"</string>
+				<key>title</key>
+				<string>Text Shortcut</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>29D41B43-2CCA-476C-BD23-84DCA6DD3D3A</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>php input.php ts "{query}"</string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>16039760-F173-4AB8-9C73-DA7401D5DE23</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -62,16 +136,28 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>0</integer>
+				<integer>68</integer>
 				<key>script</key>
-				<string>php input.php "{query}"</string>
+				<string>set theQuery to "{query}"
+if theQuery is not "" then
+  if theQuery starts with "sudo" then
+  set result to do shell script theQuery with administrator privileges
+  if result is not "" then
+    display alert result
+  end if
+  else
+  set result to do shell script theQuery
+  if result is not "" then
+    display alert result
+  end if
+  end ifend if</string>
 				<key>type</key>
-				<integer>0</integer>
+				<integer>6</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.output.script</string>
 			<key>uid</key>
-			<string>16039760-F173-4AB8-9C73-DA7401D5DE23</string>
+			<string>8AD2855C-1B8F-4998-84FD-1948C4939C4A</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -83,7 +169,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>ts</string>
+				<string>tc</string>
 				<key>queuedelaycustom</key>
 				<integer>1</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -93,9 +179,9 @@
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>script</key>
-				<string>php filter.php "{query}"</string>
+				<string>php filter.php tc "{query}"</string>
 				<key>title</key>
-				<string>Text Shortcut</string>
+				<string>Text Command</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -104,7 +190,26 @@
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>29D41B43-2CCA-476C-BD23-84DCA6DD3D3A</string>
+			<string>A6C34548-4213-4E69-962C-E4289E361265</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>4</integer>
+				<key>script</key>
+				<string>php input.php tc "{query}"</string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>62C33B2F-5F6C-4D8C-9CC6-FB5A6FF4A143</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -112,7 +217,11 @@
 	<key>readme</key>
 	<string>1.0 - Hooray!
 
-1.0.1 - Bug fix - thx to dserodio.</string>
+1.0.1 - Bug fix - thx to dserodio.
+
+1.1 - New Command Available!!!!
+Now you can register commands to execute in Terminal.
+https://github.com/rtoshiro/alfred-workflows-textshortcut</string>
 	<key>uidata</key>
 	<dict>
 		<key>16039760-F173-4AB8-9C73-DA7401D5DE23</key>
@@ -123,15 +232,30 @@
 		<key>29D41B43-2CCA-476C-BD23-84DCA6DD3D3A</key>
 		<dict>
 			<key>ypos</key>
-			<real>180</real>
+			<real>10</real>
 		</dict>
 		<key>544C3B1B-235B-485A-9964-9E1F5C91FB67</key>
 		<dict>
 			<key>ypos</key>
 			<real>10</real>
 		</dict>
+		<key>62C33B2F-5F6C-4D8C-9CC6-FB5A6FF4A143</key>
+		<dict>
+			<key>ypos</key>
+			<real>130</real>
+		</dict>
+		<key>8AD2855C-1B8F-4998-84FD-1948C4939C4A</key>
+		<dict>
+			<key>ypos</key>
+			<real>130</real>
+		</dict>
+		<key>A6C34548-4213-4E69-962C-E4289E361265</key>
+		<dict>
+			<key>ypos</key>
+			<real>130</real>
+		</dict>
 	</dict>
 	<key>webaddress</key>
-	<string></string>
+	<string>https://github.com/rtoshiro/alfred-workflows-textshortcut</string>
 </dict>
 </plist>

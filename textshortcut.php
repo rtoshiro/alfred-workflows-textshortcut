@@ -5,23 +5,23 @@ class TextShortcut
 {
   public $workflows;
   public $pattern;
-  
+
   public function __construct()
   {
     $this->workflows = new Workflows();
     $this->pattern = '/[\\\(\)\/ ]/i';
   }
-  
+
   public function command($cmd = null)
   {
     if ($cmd == null) return '';
-    
+
     $cmd = preg_replace($this->pattern, '_', $cmd);
     return $cmd;
   }
-  
+
   // Retorna a string, se for para ler
-  public function parse($query = null)
+  public function parse($snippet_type = 'ts', $query = null)
   {
     $result = null;
     $elements = explode(' ', $query);
@@ -39,7 +39,7 @@ class TextShortcut
           if (!empty($cmd))
           {
             // Apaga o arquivo
-            $filePath = $this->workflows->data() . '/' . $cmd . '.ts';
+            $filePath = $this->workflows->data() . '/' . $cmd . '.' . $snippet_type;
             unlink($filePath);
           }
           return '';
@@ -57,10 +57,10 @@ class TextShortcut
           {
             // Escreve o arquivo com o nome do comando
             $text = shell_exec('osascript get_from_clipboard.scpt ' . $cmd);
-          
+
             $text = preg_replace('/.*\n\n/', '', $text);
-            
-            $this->workflows->write($text, $cmd . '.ts');
+
+            $this->workflows->write($text, $cmd . '.' . $snippet_type);
           }
           return '';
         }
@@ -69,15 +69,15 @@ class TextShortcut
       {
         $cmd = implode($elements);
         $cmd = $this->command($cmd);
-        $result = $this->workflows->read($cmd . '.ts');
+        $result = $this->workflows->read($cmd . '.' . $snippet_type);
       }
-     
+
       if (isset($result))
         return $result;
-        
+
       return '';
     }
-    
+
     return '';
   }
 }
