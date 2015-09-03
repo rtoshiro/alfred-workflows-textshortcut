@@ -2,6 +2,18 @@
 require_once('textshortcut.php');
 require_once('workflows.php');
 
+function readUntil($filepath, $len)
+{
+  $total = filesize($filepath);
+  if ($len < $total)
+    $len = $total;
+  $fh = fopen($filepath, "rb");
+  $data = fread($fh, $len);
+  fclose($fh);
+
+  return $data;
+}
+
 $t = new TextShortcut();
 $w = new Workflows();
 $data = $w->data();
@@ -55,12 +67,16 @@ if (count($elements) > 0)
     {
       while (false !== ($entry = readdir($handle)))
       {
+        $filepath = $data . '/' . $entry;
+        $content = readUntil($filepath, 255);
+
         $entry = strtolower($entry);
         $basename = str_replace('.' . $filter_by, '', $entry);
         $ext = end(explode('.', $entry));
+
         if ($ext == $filter_by && substr($entry, 0, 1) != '.' && (empty($query) || (strpos($basename, $query) === 0)))
         {
-          $w->result( md5($basename), $basename, $titles[$filter_by] . ': ' . $basename,  $filter_by . ' ' . $basename, 'ClippingText.icns', 'yes', $basename );
+          $w->result( md5($basename), $basename, $titles[$filter_by] . ': ' . $basename, $content, 'ClippingText.icns', 'yes', $basename );
           $has_one= true;
         }
       }

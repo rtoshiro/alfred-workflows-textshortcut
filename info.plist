@@ -225,7 +225,9 @@ if theQuery is not "" then
 Now you can register commands to execute in Terminal.
 https://github.com/rtoshiro/alfred-workflows-textshortcut
 
-1.1.1 - Little bug fix</string>
+1.1.1 - Little bug fix
+
+1.2 - Now "tc" shows a little bit of the command's content.</string>
 	<key>uidata</key>
 	<dict>
 		<key>16039760-F173-4AB8-9C73-DA7401D5DE23</key>
