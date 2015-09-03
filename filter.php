@@ -7,8 +7,8 @@ $w = new Workflows();
 $data = $w->data();
 
 $has_one = false;
-$filter_by = $argv[1];
-$query = $argv[2];
+$filter_by = strtolower($argv[1]);
+$query = strtolower($argv[2]);
 $titles = array(
   'ts' => 'Text Shortcut',
   'tc' => 'Text Command'
@@ -31,6 +31,7 @@ if (count($elements) > 0)
     {
       while (false !== ($entry = readdir($handle)))
       {
+        $entry = strtolower($entry);
         $basename = str_replace('.' . $filter_by, '', $entry);
         if (!empty($basename))
         {
@@ -54,6 +55,7 @@ if (count($elements) > 0)
     {
       while (false !== ($entry = readdir($handle)))
       {
+        $entry = strtolower($entry);
         $basename = str_replace('.' . $filter_by, '', $entry);
         $ext = end(explode('.', $entry));
         if ($ext == $filter_by && substr($entry, 0, 1) != '.' && (empty($query) || (strpos($basename, $query) === 0)))
@@ -65,13 +67,11 @@ if (count($elements) > 0)
       closedir($handle);
     }
   }
-
-  if (!$has_one)
-  {
-    $w->result( '', '', $titles[$filter_by] . ' Not Found', '', 'ClippingText.icns', 'yes', '' );
-  }
 }
-
+if (!$has_one)
+{
+  $w->result( '', '', $titles[$filter_by] . ' Not Found', '', 'ClippingText.icns', 'yes', '' );
+}
 
 echo $w->toxml();
 
