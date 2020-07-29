@@ -17,6 +17,8 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 		</array>
 		<key>29D41B43-2CCA-476C-BD23-84DCA6DD3D3A</key>
@@ -28,6 +30,8 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 		</array>
 		<key>62C33B2F-5F6C-4D8C-9CC6-FB5A6FF4A143</key>
@@ -39,6 +43,8 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 		</array>
 		<key>A6C34548-4213-4E69-962C-E4289E361265</key>
@@ -50,6 +56,8 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 		</array>
 	</dict>
@@ -66,6 +74,8 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>escaping</key>
@@ -80,8 +90,16 @@
 				<integer>0</integer>
 				<key>queuemode</key>
 				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
 				<key>script</key>
 				<string>php filter.php ts "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
 				<key>title</key>
 				<string>Text Shortcut</string>
 				<key>type</key>
@@ -94,7 +112,7 @@
 			<key>uid</key>
 			<string>29D41B43-2CCA-476C-BD23-84DCA6DD3D3A</string>
 			<key>version</key>
-			<integer>0</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -105,6 +123,10 @@
 				<integer>0</integer>
 				<key>script</key>
 				<string>php input.php ts "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
 				<key>type</key>
 				<integer>0</integer>
 			</dict>
@@ -113,7 +135,7 @@
 			<key>uid</key>
 			<string>16039760-F173-4AB8-9C73-DA7401D5DE23</string>
 			<key>version</key>
-			<integer>0</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -122,13 +144,15 @@
 				<true/>
 				<key>clipboardtext</key>
 				<string></string>
+				<key>transient</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
 			<string>544C3B1B-235B-485A-9964-9E1F5C91FB67</string>
 			<key>version</key>
-			<integer>0</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -136,22 +160,28 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>4</integer>
+				<integer>68</integer>
 				<key>script</key>
-				<string>php input.php tc "{query}"</string>
+				<string>osascript execute.scpt "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
 				<key>type</key>
 				<integer>0</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>62C33B2F-5F6C-4D8C-9CC6-FB5A6FF4A143</string>
+			<string>8AD2855C-1B8F-4998-84FD-1948C4939C4A</string>
 			<key>version</key>
-			<integer>0</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>escaping</key>
@@ -170,6 +200,12 @@
 				<string>Loading...</string>
 				<key>script</key>
 				<string>php filter.php tc "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
 				<key>title</key>
 				<string>Text Command</string>
 				<key>type</key>
@@ -182,7 +218,7 @@
 			<key>uid</key>
 			<string>A6C34548-4213-4E69-962C-E4289E361265</string>
 			<key>version</key>
-			<integer>0</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -190,30 +226,22 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>68</integer>
+				<integer>4</integer>
 				<key>script</key>
-				<string>set theQuery to "{query}"
-if theQuery is not "" then
-  if theQuery starts with "sudo" then
-  set result to do shell script theQuery with administrator privileges
-  if result is not "" then
-    display alert result
-  end if
-  else
-  set result to do shell script theQuery
-  if result is not "" then
-    display alert result
-  end if
-  end ifend if</string>
+				<string>php input.php tc "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
 				<key>type</key>
-				<integer>6</integer>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.script</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>8AD2855C-1B8F-4998-84FD-1948C4939C4A</string>
+			<string>62C33B2F-5F6C-4D8C-9CC6-FB5A6FF4A143</string>
 			<key>version</key>
-			<integer>0</integer>
+			<integer>2</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -232,31 +260,43 @@ https://github.com/rtoshiro/alfred-workflows-textshortcut
 	<dict>
 		<key>16039760-F173-4AB8-9C73-DA7401D5DE23</key>
 		<dict>
+			<key>xpos</key>
+			<integer>500</integer>
 			<key>ypos</key>
 			<real>10</real>
 		</dict>
 		<key>29D41B43-2CCA-476C-BD23-84DCA6DD3D3A</key>
 		<dict>
+			<key>xpos</key>
+			<integer>300</integer>
 			<key>ypos</key>
 			<real>10</real>
 		</dict>
 		<key>544C3B1B-235B-485A-9964-9E1F5C91FB67</key>
 		<dict>
+			<key>xpos</key>
+			<integer>700</integer>
 			<key>ypos</key>
 			<real>10</real>
 		</dict>
 		<key>62C33B2F-5F6C-4D8C-9CC6-FB5A6FF4A143</key>
 		<dict>
+			<key>xpos</key>
+			<integer>500</integer>
 			<key>ypos</key>
 			<real>130</real>
 		</dict>
 		<key>8AD2855C-1B8F-4998-84FD-1948C4939C4A</key>
 		<dict>
+			<key>xpos</key>
+			<integer>700</integer>
 			<key>ypos</key>
 			<real>130</real>
 		</dict>
 		<key>A6C34548-4213-4E69-962C-E4289E361265</key>
 		<dict>
+			<key>xpos</key>
+			<integer>300</integer>
 			<key>ypos</key>
 			<real>130</real>
 		</dict>

@@ -74,7 +74,15 @@ if (count($elements) > 0)
         $basename = str_replace('.' . $filter_by, '', $entry);
         $ext = end(explode('.', $entry));
 
-        if ($ext == $filter_by && substr($entry, 0, 1) != '.' && (empty($query) || (strpos($basename, $query) === 0)))
+        if (
+          $ext == $filter_by && 
+          substr($entry, 0, 1) != '.' && 
+          (
+            empty($query) || 
+            (strpos($basename, $query) === 0) ||
+            (strlen($query) > 2 && strpos($content, $query) !== false)
+          )
+        )
         {
           $w->result( md5($basename), $basename, $titles[$filter_by] . ': ' . $basename, $content, 'ClippingText.icns', 'yes', $basename );
           $has_one= true;
